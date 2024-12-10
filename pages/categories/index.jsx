@@ -231,7 +231,7 @@ export default function Categories(props) {
 // Fetch All Product Data Api ------------------------------------------------------/
 export async function getServerSideProps() {
   const response = await fetch(
-    "http://localhost:3000/api/get-all-product",
+    "https://glambymaha.vercel.app/api/get-all-product",
   );
   const data = await response.json();
 

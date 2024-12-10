@@ -36,17 +36,17 @@ export default function Home({ products, products2, products3 }) {
 export async function getServerSideProps(props) {
   const queryString = queryStr.stringify(props.query);
   const res = await fetch(
-    `http://localhost:3000/api/get-all-product?${queryString}`,
+    `https://glambymaha.vercel.app/api/get-all-product?${queryString}`,
   );
   const data = await res.json();
 
   const fetchData = await fetch(
-    `http://localhost:3000/api/get-all-product?bestSelling=true`,
+    `https://glambymaha.vercel.app/api/get-all-product?bestSelling=true`,
   );
   const jsonData = await fetchData.json();
 
   const fetchData2 = await fetch(
-    `http://localhost:3000/api/get-all-product?onSale=true`,
+    `https://glambymaha.vercel.app/api/get-all-product?onSale=true`,
   );
   const jsonData2 = await fetchData2.json();
 

@@ -500,7 +500,7 @@ export async function getServerSideProps(props) {
   const queryString = queryStr.stringify(props.query);
   const res = await fetch(
     // `https://u-store.vercel.app//api/users?${queryString}`
-    `http://localhost:3000/api/users?${queryString}`,
+    `https://glambymaha.vercel.app/api/users?${queryString}`,
   );
   const data = await res.json();
 
