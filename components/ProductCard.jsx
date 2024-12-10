@@ -51,13 +51,13 @@ const ProductCard = ({ data, index }) => {
             className="h-full w-full rounded-lg object-contain object-center transition-all duration-300"
           />
           <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2   items-end justify-center gap-6 py-2">
-            <Image
+            {/* <Image
               width={700}
               height={700}
               alt="watermark"
               src="/watermark.png"
               className="h-48 w-48 object-cover invert"
-            />
+            /> */}
           </div>
         </Link>
       </div>
