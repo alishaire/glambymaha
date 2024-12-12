@@ -57,7 +57,7 @@ const Dnav = () => {
                     {user.fullname}
                   </p>
                   <span className="text-[11px] cursor-pointer text-red-500 hover:text-red-600">
-                    {user.role}
+                    {/* {user.role} */}
                   </span>
                 </div>
 

@@ -1,12 +1,17 @@
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
-
+import 'react-phone-number-input/style.css'
+import PhoneInput from "react-phone-number-input";
 const Register = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const [phoneValue, setPhoneValue] = useState();
+  useEffect(() => {
+    setFormData({ ...formData, phone: phoneValue });
+  }, [phoneValue]);
   const [formData, setFormData] = useState({
     fullname: "",
     username: "",
@@ -63,24 +68,24 @@ const Register = () => {
           <form className="space-y-10 py-6" onSubmit={submitForm}>
             <div className="grid grid-cols-2 gap-6">
               {/* Full name  ---------------- */}
-            <div>
-              <label
-                htmlFor="fullName"
-                className="block text-sm leading-6 text-gray-500"
-              >
-                Full Name
-              </label>
-              <div className="mt-2">
-                <input
-                  id="fullName"
-                  name="fullname"
-                  onChange={routehandler}
-                  value={formData.fullname}
-                  autoComplete="fullName"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-400 sm:text-sm sm:leading-6"
-                />
+              <div>
+                <label
+                  htmlFor="fullName"
+                  className="block text-sm leading-6 text-gray-500"
+                >
+                  Full Name
+                </label>
+                <div className="mt-2">
+                  <input
+                    id="fullName"
+                    name="fullname"
+                    onChange={routehandler}
+                    value={formData.fullname}
+                    autoComplete="fullName"
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-400 sm:text-sm sm:leading-6"
+                  />
+                </div>
               </div>
-            </div>
               {/* Username  ----------------*/}
               <div>
                 <label
@@ -109,14 +114,21 @@ const Register = () => {
                   Phone
                 </label>
                 <div className="mt-2">
-                  <input
+                  <PhoneInput
+                    name="phone"
+                    placeholder="Phone"
+                    onChange={setPhoneValue}
+                    value={formData?.phone}
+                    className="rgisterphone"
+                  />
+                  {/* <input
                     id="phone"
                     name="phone"
                     onChange={routehandler}
                     autoComplete="phone"
                     value={formData.phone}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-400 sm:text-sm sm:leading-6"
-                  />
+                  /> */}
                 </div>
               </div>
               {/* Email ----------------*/}

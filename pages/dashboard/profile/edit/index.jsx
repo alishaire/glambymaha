@@ -4,17 +4,22 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
-
+import 'react-phone-number-input/style.css'
+import PhoneInput from "react-phone-number-input";
 const EditProfile = () => {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({});
   const router = useRouter();
-
+  
   const { user, refetch } = useContext(AuthContext);
 
   const [tempImage, setTempImage] = useState(null);
-
+  const [phoneValue, setPhoneValue] = useState();
+  useEffect(() => {
+    setFormData({ ...formData, phone: phoneValue });
+  }, [phoneValue]);
   const routehandler = (e) => {
+    console.log(e)
     const name = e.target.name;
     const value = e.target.value;
 
@@ -235,7 +240,14 @@ const EditProfile = () => {
                 >
                   Phone
                 </label>
-                <input
+                <PhoneInput
+                name="phone"
+                placeholder="Phone"
+                onChange={setPhoneValue}
+                value={formData?.phone}
+                className="editphone"
+                />
+                {/* <input
                   type="text"
                   id="phone"
                   name="phone"
@@ -243,10 +255,10 @@ const EditProfile = () => {
                   onChange={routehandler}
                   value={formData?.phone}
                   className="rounded-lg py-2 border text-[#555] focus:text-[#1553A1] border-gray-300 focus:border-[#1554a177] px-2"
-                />
+                /> */}
               </div>
               {/* Gender */}
-              <div className="flex flex-col">
+              {/* <div className="flex flex-col">
                 <label
                   className="text-[hsla(236,12%,23%,1)] text-sm mb-1"
                   htmlFor="gender"
@@ -266,7 +278,7 @@ const EditProfile = () => {
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                 </select>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

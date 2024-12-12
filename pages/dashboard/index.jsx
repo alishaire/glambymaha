@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import queryStr from "query-string";
-import { useEffect, useState } from "react";
-
+import { useEffect, useState,useContext } from "react";
+import { AuthContext } from "@/context/AuthContext";
 const tableHeader = [
   { lable: "Name", align: "left" },
   { lable: "Category", align: "left" },
@@ -11,7 +11,8 @@ const tableHeader = [
 
 const Dashboard = ({ products, start, end, total, page }) => {
   var pageCount = parseInt(page);
-
+  const { user } = useContext(AuthContext);
+  console.log(user)
   const router = useRouter();
 
   const [statsData, setStatsData] = useState([]);
@@ -28,56 +29,59 @@ const Dashboard = ({ products, start, end, total, page }) => {
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-4 p-4 md:grid-cols-2 lg:grid-cols-4">
-        {/* Dashboard Card 01 -----------*/}
-        <div className="globalShadow flex rounded-lg bg-white px-7 py-5">
-          <div className=" flex-1">
-            <h2 className=" mb-2 text-sm text-slate-600">Products</h2>
-            <span className=" text-2xl font-semibold text-slate-800">
-              {statsData.products}
-            </span>
-          </div>
-          <div>
-            <i className="fa-solid fa-chart-simple rounded-md bg-cyan-200 p-2 text-cyan-700"></i>
-          </div>
+    {
+      user?.role === "admin" ?<div className="grid grid-cols-1 gap-4 p-4 md:grid-cols-2 lg:grid-cols-4">
+      {/* Dashboard Card 01 -----------*/}
+      <div className="globalShadow flex rounded-lg bg-white px-7 py-5">
+        <div className=" flex-1">
+          <h2 className=" mb-2 text-sm text-slate-600">Products</h2>
+          <span className=" text-2xl font-semibold text-slate-800">
+            {statsData.products}
+          </span>
         </div>
-        {/* Dashboard Card 02 -----------*/}
-        <div className="globalShadow flex rounded-lg bg-white px-7 py-5">
-          <div className=" flex-1">
-            <h2 className=" mb-2 text-base text-slate-600">Category</h2>
-            <span className=" text-2xl font-semibold text-slate-800">
-              {statsData?.category}
-            </span>
-          </div>
-          <div>
-            <i className="fa-solid fa-box rounded-md bg-emerald-200 p-2 text-green-700"></i>
-          </div>
-        </div>
-        {/* Dashboard Card 03 -----------*/}
-        <div className="globalShadow flex rounded-lg bg-white px-7 py-5">
-          <div className=" flex-1">
-            <h2 className=" mb-2 text-base text-slate-600">User</h2>
-            <span className=" text-2xl font-semibold text-slate-800">
-              {statsData?.users}
-            </span>
-          </div>
-          <div>
-            <i className="fa-solid fa-user rounded-md bg-fuchsia-200 p-2 text-fuchsia-700"></i>
-          </div>
-        </div>
-        {/* Dashboard Card 04 -----------*/}
-        <div className="globalShadow flex rounded-lg bg-white px-7 py-5">
-          <div className=" flex-1">
-            <h2 className=" mb-2 text-base text-slate-600">Orders</h2>
-            <span className=" text-2xl font-semibold text-slate-800">
-              {statsData?.orders}
-            </span>
-          </div>
-          <div>
-            <i className="fa-solid fa-cart-shopping rounded-md bg-rose-200 p-2 text-rose-700"></i>
-          </div>
+        <div>
+          <i className="fa-solid fa-chart-simple rounded-md bg-cyan-200 p-2 text-cyan-700"></i>
         </div>
       </div>
+      {/* Dashboard Card 02 -----------*/}
+      <div className="globalShadow flex rounded-lg bg-white px-7 py-5">
+        <div className=" flex-1">
+          <h2 className=" mb-2 text-base text-slate-600">Category</h2>
+          <span className=" text-2xl font-semibold text-slate-800">
+            {statsData?.category}
+          </span>
+        </div>
+        <div>
+          <i className="fa-solid fa-box rounded-md bg-emerald-200 p-2 text-green-700"></i>
+        </div>
+      </div>
+      {/* Dashboard Card 03 -----------*/}
+      <div className="globalShadow flex rounded-lg bg-white px-7 py-5">
+        <div className=" flex-1">
+          <h2 className=" mb-2 text-base text-slate-600">User</h2>
+          <span className=" text-2xl font-semibold text-slate-800">
+            {statsData?.users}
+          </span>
+        </div>
+        <div>
+          <i className="fa-solid fa-user rounded-md bg-fuchsia-200 p-2 text-fuchsia-700"></i>
+        </div>
+      </div>
+      {/* Dashboard Card 04 -----------*/}
+      <div className="globalShadow flex rounded-lg bg-white px-7 py-5">
+        <div className=" flex-1">
+          <h2 className=" mb-2 text-base text-slate-600">Orders</h2>
+          <span className=" text-2xl font-semibold text-slate-800">
+            {statsData?.orders}
+          </span>
+        </div>
+        <div>
+          <i className="fa-solid fa-cart-shopping rounded-md bg-rose-200 p-2 text-rose-700"></i>
+        </div>
+      </div>
+    </div>:""
+    }
+      
 
       <main className="grid grid-cols-1 gap-4 px-4 py-0 md:grid-cols-2 lg:grid-cols-1 2xl:grid-cols-1 mb-4">
         <div className="globalShadow flex rounded-lg bg-white px-0 py-4">

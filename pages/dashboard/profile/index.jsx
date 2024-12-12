@@ -136,7 +136,7 @@ const index = () => {
                     <div>
                       <p className="text-xs text-[#00000084] mb-1">Phone</p>
                       <span className="text-[#444] text-sm">
-                        +92 {user.phone}
+                        {user.phone}
                       </span>
                     </div>
                   </div>
